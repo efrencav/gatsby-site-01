@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Layout from '../../components/layout2';
 import efrenImage from '../../images/efren.jpg';
+import { graphql } from 'gatsby';
 
 // const User = props => (
 //     <div className={styles.user}>
@@ -51,19 +52,29 @@ const User = props => (
     </UserWrapper>
 )
 
-const About = () => (
+const About = ({data}) => (
     <Layout>
         <div>
             <h1>About Page</h1>
 
             <User
-                username="Efren Cavazos"
+                username={data.site.siteMetadata.author}
                 avatar={efrenImage}
-                excerpt="Art director" />
+                excerpt={data.site.siteMetadata.description} />
             <br/>
             <Link to="/">Go back to the homepage</Link>
         </div>
     </Layout>
 )
+export const query = graphql`
+    query {
+        site {
+            siteMetadata {
+                author
+                description
+            }
+        }
+    }
+`
 
 export default About;
