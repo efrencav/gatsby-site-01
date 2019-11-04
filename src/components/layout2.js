@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 
 
 
@@ -24,9 +25,20 @@ const Layout2 = ({children}) => (
                     title
                 }
             }
-        }
+                file(relativePath: {
+                    regex: "/blog-header/"
+                }) {
+                    childImageSharp {
+                        fluid(maxWidth: 1000) {
+                            ...GatsbyImageSharpFluid_tracedSVG
+                        }
+                    }
+                }
+            }
         `}
         render={data => (
+            <div>
+                <Img style={{maxHeight: '40vh'}} fluid={data.file.childImageSharp.fluid} />
             <div style={{
                     margin: `0 auto`,
                     maxWidth: 650,
@@ -47,6 +59,7 @@ const Layout2 = ({children}) => (
                     </header>
                     {children}
                 </div>
+            </div>
         )}
     />
     
