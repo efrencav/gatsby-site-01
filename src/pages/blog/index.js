@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import styled from'styled-components';
+import { Helmet } from 'react-helmet';
 import Layout from '../../components/layout2';
 
 const Headline = styled.h1`
@@ -12,6 +13,13 @@ export default ({data}) => (
 
     <Layout>
         <div>
+            <Helmet>
+                <meta charset="utf-8" />
+                <title>My Blog Posts Overview</title>
+                <meta name="description" content="Free Web Tutorials"></meta>
+                <meta name="keywords" content="react, JavaScript"></meta>
+                <meta name="author" content="Efren Cavazos"></meta>
+            </Helmet>
             <Headline>My Blog Posts</Headline>
             <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
             {data.allMarkdownRemark.edges.map(({node}) => (
